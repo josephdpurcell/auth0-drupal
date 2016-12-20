@@ -1,6 +1,8 @@
 Drupal8 Plugin for Auth0
 ====
 
+[![Code Climate](https://codeclimate.com/github/auth0/auth0-drupal/badges/gpa.svg)](https://codeclimate.com/github/auth0/auth0-drupal)
+
 Single Sign On for Enterprises + Social Login + User/Passwords. For all your Drupal instances. Powered by Auth0.
 
 Demo: <http://auth0-drupal.azurewebsites.net>
