@@ -53,6 +53,16 @@ class BasicAdvancedForm extends FormBase {
         '#description' => t('Mark this if you require the user to have a verified email to login.')
     );
 
+    $form['auth0_join_user_by_mail_enabled'] = array(
+    		'#type' => 'checkbox',
+    		'#title' => t('Link auth0 logins to drupal users by email address'),
+    		'#default_value' => variable_get('auth0_join_user_by_mail_enabled', FALSE),
+    		'#description' => t('If enabled, when a user logs into Drupal for the first time, the system will use the email
+address of the Auth0 user to search for a drupal user with the same email address and setup a link to that
+Drupal user account.
+<br/>If not enabled, then a new Drupal user will be created even if a Drupal user with the same email address already exists.
+'),
+    );
     $form['auth0_login_css'] = array(
         '#type' => 'textarea',
         '#title' => t('Login widget css'),
