@@ -123,12 +123,20 @@ class AuthController extends ControllerBase {
             }
         }
         $joinUser = false;
-        // If the user has a verified email or is a database user try to see if there is
-        // a user to join with. The isDatabase is because we don't want to allow database
-        // user creation if there is an existing one with no verified email
-        if ($userInfo['email_verified'] || $isDatabaseUser) {
-            $joinUser = user_load_by_mail($userInfo['email']);
-        }
+        if ($config->get('auth0_join_user_by_mail_enabled', FALSE)) {
+      		function_exists('dd') && dd($user_info['email'], 'join user by mail is enabled, looking up user by email');
+		      // If the user has a verified email or is a database user try to see if there is
+		      // a user to join with. The isDatabase is because we don't want to allow database
+		      // user creation if there is an existing one with no verified email.
+		      if (!empty($user_info['email_verified']) || $isDatabaseUser) {
+		        $joinUser = user_load_by_mail($user_info['email']);
+		      }
+	    } else {
+	      	function_exists('dd') && dd($user_info['preferred_username'], 'join user by username');
+	      	if (!empty($user_info['email_verified']) || $isDatabaseUser) {
+	        	$joinUser = user_load_by_name($user_info['preferred_username']);
+	      	}
+	    }
 
         if ($joinUser) { 
           // If we are here, we have a potential join user
