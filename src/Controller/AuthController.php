@@ -123,7 +123,7 @@ class AuthController extends ControllerBase {
             }
         }
         $joinUser = false;
-        if (variable_get('auth0_join_user_by_mail_enabled', FALSE)) {
+        if ($config->get('auth0_join_user_by_mail_enabled', FALSE)) {
       		function_exists('dd') && dd($user_info['email'], 'join user by mail is enabled, looking up user by email');
 		      // If the user has a verified email or is a database user try to see if there is
 		      // a user to join with. The isDatabase is because we don't want to allow database
